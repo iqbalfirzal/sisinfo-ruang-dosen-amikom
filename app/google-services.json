@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "444957610578",
+    "firebase_url": "https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com",
+    "project_id": "iqzal-app-bimbngan-ruang-dosen",
+    "storage_bucket": "iqzal-app-bimbngan-ruang-dosen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444957610578:android:8fcc8e24400598afe5858b",
+        "android_client_info": {
+          "package_name": "iqzal.app.bimbingan.ruangdosen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444957610578-nde73r6d7degtevsn4gdh3qfu9tta6gm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iqzal.app.bimbingan.ruangdosen",
+            "certificate_hash": "0824ad4c043535f38fbae69b452ae52b079dddca"
+          }
+        },
+        {
+          "client_id": "444957610578-d1pgstqq3sb0no89nr9mkf6i7g8q5m2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClhJbmImOog4vrnvH6i_PF7GhOIBMkvyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444957610578-d1pgstqq3sb0no89nr9mkf6i7g8q5m2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
