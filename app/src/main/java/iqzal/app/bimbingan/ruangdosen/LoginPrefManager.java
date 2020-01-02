@@ -1,7 +1,6 @@
 package iqzal.app.bimbingan.ruangdosen;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
 public class LoginPrefManager {
