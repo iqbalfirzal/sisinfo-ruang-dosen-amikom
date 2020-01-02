@@ -17,6 +17,7 @@
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:layout_marginBottom="30dp"
+    android:elevation="8dp"
     tools:context=".LoginMhs">
     <ImageView
         android:id="@+id/imageView"
@@ -47,7 +48,7 @@
         android:background="@drawable/circle_box_2"
         android:hint="   NIM"
         android:inputType="textPersonName"
-        android:digits="17111060."/>
+        android:digits="0123456789."/>
 
     <EditText
         android:id="@+id/txtPassMhs"

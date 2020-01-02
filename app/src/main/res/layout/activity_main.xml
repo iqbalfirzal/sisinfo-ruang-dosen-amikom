@@ -11,9 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_2"
+        android:background="#0D87C9"
         android:paddingBottom="8dp"
-        android:elevation="6dp"
+        android:elevation="8dp"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -22,8 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="8dp"
             android:padding="10dp"
+            android:elevation="8dp"
             android:background="@drawable/searchstyle"
             android:layout_weight="1"
             app:queryHint="Cari Dosen" />
@@ -35,10 +36,13 @@
             android:layout_gravity="center"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/default_user"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/black"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="4dp"
+            android:elevation="4dp"
+            android:src="@drawable/user_icon_fab"
+            app:civ_border_width="1dp"
+            app:civ_circle_background_color="@color/white"
+            app:civ_border_color="#BBBB"
             android:onClick="openMhsProfile"/>
     </LinearLayout>
 
@@ -46,9 +50,12 @@
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="9dp"
-        android:background="@drawable/circle_box_2"
-        android:layout_marginTop="20dp"
+        android:background="@drawable/circle_box_5"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="-10dp"
+        android:elevation="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </LinearLayout>

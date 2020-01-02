@@ -22,23 +22,23 @@ public class SplashScreen extends AppCompatActivity {
     private void networkChecking(){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            if (isOnline()) {
+        //if (networkInfo != null && networkInfo.isConnected()) {
+          //  if (isOnline()) {
                 Intent intent = new Intent(this, Choose.class);
                 startActivity(intent);
                 finish();
-            } else {
-                showNoDataReceivedNoticeDialog();
-            }
-        } else {
-            showNoConnectionNoticeDialog();
-        }
+          //  } else {
+          //      showNoDataReceivedNoticeDialog();
+          //  }
+        //} else {
+        //    showNoConnectionNoticeDialog();
+        //}
     }
 
     public boolean isOnline() {
         Runtime runtime = Runtime.getRuntime();
         try {
-            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 google.com");
             int     exitValue = ipProcess.waitFor();
             return (exitValue == 0);
         } catch (IOException e)          { e.printStackTrace(); }
