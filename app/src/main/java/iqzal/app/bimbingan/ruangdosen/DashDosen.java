@@ -185,10 +185,9 @@ public class DashDosen extends AppCompatActivity {
         builder.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                clearPrefData();
                 auth.signOut();
-                Intent myIntent = new Intent(DashDosen.this,
-                        Choose.class);
+                Intent myIntent = new Intent(DashDosen.this, Choose.class);
                 startActivity(myIntent);
                 finish();
             }
@@ -200,6 +199,10 @@ public class DashDosen extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    private void clearPrefData(){
+        new LoginPrefManager(this).clearData();
     }
 
 }
