@@ -54,6 +54,7 @@ public class LoginMhs extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String userEmail =  dataSnapshot.getValue(String.class);
                             if(userEmail != null){
+                                saveLoginDetails(userEmail, password, username, "mhs");
                                 globalVariable.setId(username);
                                 performLogin(userEmail,password);
                             }else{
@@ -77,6 +78,10 @@ public class LoginMhs extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void saveLoginDetails(String email, String password, String id, String status){
+        new LoginPrefManager(this).saveLoginDetails(email, password, id, status);
     }
 
     private void performLogin(String emailId, String password) {

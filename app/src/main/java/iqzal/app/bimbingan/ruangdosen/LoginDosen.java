@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +54,7 @@ public class LoginDosen extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String userEmail =  dataSnapshot.getValue(String.class);
                             if(userEmail != null){
+                                saveLoginDetails(userEmail, password, username, "dosen");
                                 globalVariable.setId(username);
                                 performLogin(userEmail,password);
                             }else{
@@ -78,6 +80,10 @@ public class LoginDosen extends AppCompatActivity {
         });
     }
 
+    private void saveLoginDetails(String email, String password, String id, String status){
+        new LoginPrefManager(this).saveLoginDetails(email, password, id, status);
+    }
+
     private void performLogin(String emailId, String password) {
         auth.signInWithEmailAndPassword(emailId,password).addOnCompleteListener(LoginDosen.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -89,7 +95,6 @@ public class LoginDosen extends AppCompatActivity {
                 }else{
                     Intent intent = new Intent(LoginDosen.this, DashDosen.class);
                     startActivity(intent);
-                    finish();
                 }
             }
         });

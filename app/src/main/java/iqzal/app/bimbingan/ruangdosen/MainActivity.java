@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements DialogAboutMhs.It
     }
 
     @Override public void onItemClick() {
+        new LoginPrefManager(this).clearData();
         auth.signOut();
         Intent myIntent = new Intent(MainActivity.this,
                 Choose.class);

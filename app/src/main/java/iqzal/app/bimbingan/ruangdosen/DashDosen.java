@@ -185,6 +185,7 @@ public class DashDosen extends AppCompatActivity {
         builder.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 auth.signOut();
                 Intent myIntent = new Intent(DashDosen.this,
                         Choose.class);

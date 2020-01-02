@@ -2,37 +2,48 @@ package iqzal.app.bimbingan.ruangdosen;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.IOException;
 
+
 public class SplashScreen extends AppCompatActivity {
+    public SharedPreferences mPrefs;
+    public static final String LOGIN_PREFS = "LoginPrefsFile";
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPrefs = getSharedPreferences(LOGIN_PREFS, MODE_PRIVATE);
+        auth = FirebaseAuth.getInstance();
         networkChecking();
     }
 
     private void networkChecking(){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        //if (networkInfo != null && networkInfo.isConnected()) {
+        if (networkInfo != null && networkInfo.isConnected()) {
           //  if (isOnline()) {
-                Intent intent = new Intent(this, Choose.class);
-                startActivity(intent);
-                finish();
+                checkLoggedIn();
           //  } else {
           //      showNoDataReceivedNoticeDialog();
           //  }
-        //} else {
-        //    showNoConnectionNoticeDialog();
-        //}
+        } else {
+            showNoConnectionNoticeDialog();
+        }
     }
 
     public boolean isOnline() {
@@ -74,5 +85,31 @@ public class SplashScreen extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    private void checkLoggedIn(){
+        String iduser = new LoginPrefManager(this).getIdLoggedIn();
+        String status = new LoginPrefManager(this).getStatusLoggedIn();
+        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
+        globalVariable.setId(iduser);
+        if (!new LoginPrefManager(this).isUserLogedOut()) {
+            if (status.equals("dosen")){
+                Intent intent = new Intent(SplashScreen.this, DashDosen.class);
+                startActivity(intent);
+                finish();
+            }else if(status.equals("mhs")){
+                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent = new Intent(SplashScreen.this, Choose.class);
+                startActivity(intent);
+                finish();
+            }
+        }else{
+            Intent intent = new Intent(SplashScreen.this, Choose.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
