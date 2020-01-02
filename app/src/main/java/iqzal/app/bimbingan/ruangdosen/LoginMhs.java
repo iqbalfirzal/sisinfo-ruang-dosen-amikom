@@ -33,7 +33,7 @@ public class LoginMhs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_mahasiswa);
 
-        final StoreClass globalVariable = (StoreClass) getApplicationContext();
+        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         progressBar = findViewById(R.id.progressBar);
         nim = findViewById(R.id.txtNim);
         sandi = findViewById(R.id.txtPassMhs);

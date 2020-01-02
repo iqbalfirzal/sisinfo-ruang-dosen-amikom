@@ -51,7 +51,7 @@ public class DashDosen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_dosen);
 
-        final StoreClass globalVariable = (StoreClass) getApplicationContext();
+        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         final String id  = globalVariable.getId();
 
         firebaseRef = FirebaseDatabase.getInstance().getReference().child("dosen").child(id);

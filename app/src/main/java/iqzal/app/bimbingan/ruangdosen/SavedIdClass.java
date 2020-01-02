@@ -2,7 +2,7 @@ package iqzal.app.bimbingan.ruangdosen;
 
 import android.app.Application;
 
-public class StoreClass extends Application{
+public class SavedIdClass extends Application{
 
     private String id;
 

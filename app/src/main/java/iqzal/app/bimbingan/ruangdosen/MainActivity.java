@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity implements ActionBottomDialogFragment.ItemClickListener{
+public class MainActivity extends AppCompatActivity implements DialogAboutMhs.ItemClickListener{
     private Query firebaseRef;
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements ActionBottomDialo
     }
 
     public void openMhsProfile(View view) {
-        ActionBottomDialogFragment addPhotoBottomDialogFragment = ActionBottomDialogFragment.newInstance();
-        addPhotoBottomDialogFragment.show(getSupportFragmentManager(), ActionBottomDialogFragment.TAG);
+        DialogAboutMhs aboutmhsBottomDialogFragment = DialogAboutMhs.newInstance();
+        aboutmhsBottomDialogFragment.show(getSupportFragmentManager(), DialogAboutMhs.TAG);
     }
 
     @Override public void onItemClick() {

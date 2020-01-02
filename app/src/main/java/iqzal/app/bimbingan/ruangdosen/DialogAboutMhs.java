@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ActionBottomDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener {
+public class DialogAboutMhs extends BottomSheetDialogFragment implements View.OnClickListener {
     public static final String TAG = "ActionBottomDialog";
     private DatabaseReference firebaseRef;
     CircleImageView fotoMhs;
@@ -29,8 +29,8 @@ public class ActionBottomDialogFragment extends BottomSheetDialogFragment implem
 
     private ItemClickListener mListener;
 
-    public static ActionBottomDialogFragment newInstance() {
-        return new ActionBottomDialogFragment();
+    public static DialogAboutMhs newInstance() {
+        return new DialogAboutMhs();
     }
 
     @Nullable @Override
@@ -41,7 +41,7 @@ public class ActionBottomDialogFragment extends BottomSheetDialogFragment implem
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final StoreClass globalVariable = (StoreClass) getActivity().getApplicationContext();
+        final SavedIdClass globalVariable = (SavedIdClass) getActivity().getApplicationContext();
         final String id  = globalVariable.getId();
         firebaseRef = FirebaseDatabase.getInstance().getReference().child("mhs").child(id);
         fotoMhs = view.findViewById(R.id.fotoMhs);

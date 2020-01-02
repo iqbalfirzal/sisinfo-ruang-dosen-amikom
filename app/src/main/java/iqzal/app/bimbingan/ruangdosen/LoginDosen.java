@@ -33,7 +33,7 @@ public class LoginDosen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_dosen);
 
-        final StoreClass globalVariable = (StoreClass) getApplicationContext();
+        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         progressBar = findViewById(R.id.progressBar);
         nik = findViewById(R.id.txtNik);
         sandi = findViewById(R.id.txtPassDosen);
