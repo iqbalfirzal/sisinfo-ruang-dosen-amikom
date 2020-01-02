@@ -2,7 +2,6 @@ package iqzal.app.bimbingan.ruangdosen;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,14 +14,11 @@ import java.io.IOException;
 
 
 public class SplashScreen extends AppCompatActivity {
-    public SharedPreferences mPrefs;
-    public static final String LOGIN_PREFS = "LoginPrefsFile";
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPrefs = getSharedPreferences(LOGIN_PREFS, MODE_PRIVATE);
         auth = FirebaseAuth.getInstance();
         networkChecking();
     }

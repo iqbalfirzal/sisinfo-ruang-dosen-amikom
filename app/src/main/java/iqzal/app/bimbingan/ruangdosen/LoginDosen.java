@@ -53,7 +53,7 @@ public class LoginDosen extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String userEmail =  dataSnapshot.getValue(String.class);
                             if(userEmail != null){
-                                saveLoginDetails(userEmail, password, username, "dosen");
+                                saveLoginDetails(username, "dosen");
                                 globalVariable.setId(username);
                                 performLogin(userEmail,password);
                             }else{
@@ -79,8 +79,8 @@ public class LoginDosen extends AppCompatActivity {
         });
     }
 
-    private void saveLoginDetails(String email, String password, String id, String status){
-        new LoginPrefManager(this).saveLoginDetails(email, password, id, status);
+    private void saveLoginDetails(String id, String status){
+        new LoginPrefManager(this).saveLoginDetails(id, status);
     }
 
     private void performLogin(String emailId, String password) {
