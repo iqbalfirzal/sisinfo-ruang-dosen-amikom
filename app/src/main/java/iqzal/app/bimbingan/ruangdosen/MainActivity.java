@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements DialogAboutMhs.It
     }
 
     public void openMhsProfile(View view) {
-        DialogAboutMhs aboutmhsBottomDialogFragment = DialogAboutMhs.newInstance();
-        aboutmhsBottomDialogFragment.show(getSupportFragmentManager(), DialogAboutMhs.TAG);
+        DialogAboutMhs addphotoBottomDialogFragment = DialogAboutMhs.newInstance();
+        addphotoBottomDialogFragment.show(getSupportFragmentManager(), DialogAboutMhs.TAG);
     }
 
     @Override public void onItemClick() {
