@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
@@ -7,33 +9,33 @@
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
 <LinearLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/circle_box"
     android:orientation="vertical"
-    android:layout_marginTop="30dp"
+    android:layout_marginTop="115dp"
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
-    android:layout_marginBottom="30dp"
+    android:layout_marginBottom="100dp"
     android:elevation="8dp"
     tools:context=".LoginMhs">
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        app:srcCompat="@drawable/profil_login_1"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/profil_login_1" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MAHASISWA"
         android:textSize="40dp"
-        android:paddingBottom="40dp"
+        android:paddingBottom="13dp"
         android:gravity="center"/>
 
 
@@ -46,7 +48,8 @@
         android:layout_gravity="center"
         android:ems="10"
         android:background="@drawable/circle_box_2"
-        android:hint="   NIM"
+        android:drawableLeft="@drawable/ic_action_name"
+        android:hint=" NIM"
         android:inputType="textPersonName"
         android:digits="0123456789."/>
 
@@ -60,20 +63,24 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="   Password"
+        android:hint=" Password"
+        android:drawableLeft="@drawable/ic_action_pass"
         android:inputType="textPassword"
         android:digits="0123456789"/>
 
     <Button
         android:id="@+id/loginMhs"
-        android:layout_marginTop="70dp"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:layout_gravity="center"
         android:theme="@style/buttonstyle3"
         android:background="@drawable/circle_button"
         style="@style/Widget.AppCompat.Button.Borderless"
+
         android:text="LOGIN" />
     <ProgressBar
         android:id="@+id/progressBar"
@@ -84,4 +91,5 @@
         />
 
 </LinearLayout>
+
 </RelativeLayout>
