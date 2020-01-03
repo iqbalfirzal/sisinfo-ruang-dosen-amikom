@@ -12,9 +12,9 @@
         android:top="7dp" />
 
     <stroke
-        android:width="3dp"
-        android:color="#0A496A" />
+        android:width="2dp"
+        android:color="#0078A6" />
 
-    <corners android:radius="5dp" />
+    <corners android:radius="20dp" />
 
 </shape>

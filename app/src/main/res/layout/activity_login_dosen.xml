@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:orientation="vertical"
-    android:scrollbarAlwaysDrawVerticalTrack="true">
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".LoginDosen">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/circle_box"
         android:orientation="vertical"
-        android:layout_marginTop="115dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="100dp"
-        android:elevation="8dp"
-    tools:context=".LoginDosen">
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:elevation="8dp">
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
@@ -26,14 +25,15 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             app:srcCompat="@drawable/profil_login_1" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="DOSEN"
         android:textSize="40dp"
-        android:paddingBottom="13dp"
+        android:textColor="#BB131313"
+        android:paddingBottom="60dp"
         android:gravity="center"/>
 
 
@@ -69,9 +69,11 @@
 
     <Button
         android:id="@+id/loginDosen"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
-        android:layout_width="250dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:textColor="@color/white"
@@ -80,12 +82,12 @@
         android:background="@drawable/circle_button"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:text="LOGIN" />
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        />
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+        <View android:layout_height="20dp" android:layout_width="match_parent"/>
+    </LinearLayout>
 </RelativeLayout>
