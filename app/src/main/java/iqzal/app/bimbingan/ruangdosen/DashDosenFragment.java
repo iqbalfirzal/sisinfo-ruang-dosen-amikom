@@ -51,7 +51,6 @@ public class DashDosenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -70,8 +69,8 @@ public class DashDosenFragment extends Fragment {
         user = auth.getCurrentUser();
         posisiDosenLayout = (LinearLayout) view.findViewById(R.id.posisiDosen);
         ruanganDosenLayout = (LinearLayout) view.findViewById(R.id.ruangDosen);
+        fotoDosen = (CircleImageView) getView().findViewById(R.id.picDosen);
         btLogout = (ImageButton) view.findViewById(R.id.btLogOut);
-        fotoDosen = (CircleImageView) view.findViewById(R.id.picDosen);
         namaDosen = (TextView) view.findViewById(R.id.namaDosen);
         emailDosen = (TextView) view.findViewById(R.id.emailDosen);
         diRuanngan = (TextView) view.findViewById(R.id.diRuang);
@@ -84,11 +83,21 @@ public class DashDosenFragment extends Fragment {
         emailDosen.setText(user.getEmail());
         idDosen.setText(id);
 
+        firebaseRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String ppurl = dataSnapshot.child("ppurl").getValue().toString();
+                        Glide.with(getActivity().getApplicationContext()).setDefaultRequestOptions(RequestOptions.placeholderOf(R.drawable.default_user).error(R.drawable.default_user)).load(ppurl).into(fotoDosen);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+
         firebaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String ppurl = dataSnapshot.child("ppurl").getValue().toString();
-                Glide.with(getActivity().getApplicationContext()).setDefaultRequestOptions(RequestOptions.placeholderOf(R.drawable.default_user).error(R.drawable.default_user)).load(ppurl).into(fotoDosen);
                 String nama = dataSnapshot.child("fullname").getValue().toString();
                 namaDosen.setText(nama);
                 String ruang = dataSnapshot.child("ruang").getValue().toString();
