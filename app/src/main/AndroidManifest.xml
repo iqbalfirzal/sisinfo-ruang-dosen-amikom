@@ -25,8 +25,8 @@
         <activity android:name=".Choose" />
         <activity android:name=".LoginMhs" />
         <activity android:name=".LoginDosen" />
-        <activity android:name=".MainActivityDosen"></activity>
-        <activity android:name=".MainActivityMhs"></activity>
+        <activity android:name=".MainActivityDosen" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".MainActivityMhs" android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
