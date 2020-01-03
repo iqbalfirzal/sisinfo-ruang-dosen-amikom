@@ -29,7 +29,7 @@
     <Button
         android:id="@+id/choosedosen"
         android:layout_width="300dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
@@ -40,7 +40,7 @@
     <Button
         android:id="@+id/choosemhs"
         android:layout_width="300dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
