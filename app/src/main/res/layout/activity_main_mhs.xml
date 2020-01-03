@@ -10,15 +10,18 @@
             android:id="@+id/fragment_container_mhs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/bottom_navigation_mhs"/>
-
+            android:layout_above="@id/bottomNavShadow"/>
+    <View
+        android:id="@+id/bottomNavShadow"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@id/bottom_navigation_mhs"
+        android:background="@drawable/shadow"/>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_mhs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_nav_menu_mhs"
-        android:background="?android:attr/windowBackground"
-        android:elevation="8dp"/>
-
+        android:background="@color/white" />
 </RelativeLayout>
