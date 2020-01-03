@@ -13,7 +13,6 @@
         android:id="@+id/loginLayMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:above="@id/progressBar"
         android:background="@drawable/circle_box"
         android:orientation="vertical"
         android:layout_marginTop="100dp"
