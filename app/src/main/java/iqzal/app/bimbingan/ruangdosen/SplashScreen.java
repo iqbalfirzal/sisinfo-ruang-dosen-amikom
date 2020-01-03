@@ -28,12 +28,8 @@ public class SplashScreen extends AppCompatActivity {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            Intent intent = new Intent(SplashScreen.this, MainActivityDosen.class);
-            startActivity(intent);
-            finish();
-
             //if (isOnline()) {
-            //    checkLoggedIn();
+                checkLoggedIn();
             //} else {
             //    showNoDataReceivedNoticeDialog();
             //}
@@ -90,11 +86,11 @@ public class SplashScreen extends AppCompatActivity {
         globalVariable.setId(iduser);
         if (!new LoginPrefManager(this).isUserLogedOut()) {
             if (status.equals("dosen")){
-                Intent intent = new Intent(SplashScreen.this, DashDosen.class);
+                Intent intent = new Intent(SplashScreen.this, MainActivityDosen.class);
                 startActivity(intent);
                 finish();
             }else if(status.equals("mhs")){
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                Intent intent = new Intent(SplashScreen.this, MainActivityMhs.class);
                 startActivity(intent);
                 finish();
             }else{

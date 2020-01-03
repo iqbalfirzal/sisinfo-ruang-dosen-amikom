@@ -93,7 +93,7 @@ public class LoginMhs extends AppCompatActivity {
                     Toast.makeText(LoginMhs.this, "Password salah.",
                             Toast.LENGTH_LONG).show();
                 }else{
-                    Intent intent = new Intent(LoginMhs.this, MainActivity.class);
+                    Intent intent = new Intent(LoginMhs.this, MainActivityMhs.class);
                     startActivity(intent);
                     finish();
                 }

@@ -92,7 +92,7 @@ public class LoginDosen extends AppCompatActivity {
                     Toast.makeText(LoginDosen.this, "Password salah.",
                             Toast.LENGTH_LONG).show();
                 }else{
-                    Intent intent = new Intent(LoginDosen.this, DashDosen.class);
+                    Intent intent = new Intent(LoginDosen.this, MainActivityDosen.class);
                     startActivity(intent);
                 }
             }

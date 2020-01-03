@@ -1,14 +1,15 @@
 package iqzal.app.bimbingan.ruangdosen;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,31 +23,43 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity implements DialogAboutMhs.ItemClickListener{
+public class ListDosenFragment extends Fragment{
+
     private Query firebaseRef;
-    private FirebaseAuth auth;
-    private FirebaseUser user;
     CircleImageView userIconFab;
     ArrayList<ListDosen> list;
     RecyclerView recyclerView;
     SearchView searchView;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        firebaseRef = FirebaseDatabase.getInstance().getReference().child("dosen").orderByChild("fullname");
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        userIconFab = findViewById(R.id.iconFab);
-        recyclerView = findViewById(R.id.rv);
-        searchView = findViewById(R.id.searchView);
     }
 
     @Override
-    protected void onStart() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_listdosen_mhs, container, false);
+    }
+
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        firebaseRef = FirebaseDatabase.getInstance().getReference().child("dosen").orderByChild("fullname");
+        userIconFab = (CircleImageView) view.findViewById(R.id.iconFab);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rv);
+        searchView = (SearchView) view.findViewById(R.id.searchView);
+
+        userIconFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openProfile();
+            }
+        });
+
+    }
+
+    @Override
+    public void onStart() {
         super.onStart();
         if(firebaseRef != null){
             firebaseRef.addValueEventListener(new ValueEventListener() {
@@ -64,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements DialogAboutMhs.It
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(MainActivity.this,databaseError.getMessage(), Toast.LENGTH_LONG);
+                    Toast.makeText(getActivity(),databaseError.getMessage(), Toast.LENGTH_LONG);
                 }
             });
         }
@@ -84,18 +97,9 @@ public class MainActivity extends AppCompatActivity implements DialogAboutMhs.It
         }
     }
 
-    public void openMhsProfile(View view) {
+    private void openProfile(){
         DialogAboutMhs addphotoBottomDialogFragment = DialogAboutMhs.newInstance();
-        addphotoBottomDialogFragment.show(getSupportFragmentManager(), DialogAboutMhs.TAG);
-    }
-
-    @Override public void onItemClick() {
-        new LoginPrefManager(this).clearData();
-        auth.signOut();
-        Intent myIntent = new Intent(MainActivity.this,
-                Choose.class);
-        startActivity(myIntent);
-        finish();
+        addphotoBottomDialogFragment.show(getActivity().getSupportFragmentManager(), DialogAboutMhs.TAG);
     }
 
     private void search(String str){

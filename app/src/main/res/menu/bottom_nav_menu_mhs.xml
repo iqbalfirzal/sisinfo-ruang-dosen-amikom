@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_listdosen_mhs"
+        android:icon="@drawable/ic_list"
+        android:title="List Dosen" />
+
+    <item
+        android:id="@+id/nav_chat_mhs"
+        android:icon="@drawable/ic_chat"
+        android:title="Chat" />
+</menu>
