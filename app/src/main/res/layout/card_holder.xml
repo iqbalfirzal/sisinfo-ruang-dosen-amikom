@@ -7,13 +7,13 @@
     android:paddingBottom="10dp"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
-    android:orientation="vertical"
-    android:id="@+id/cardMain">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
         <LinearLayout
+            android:id="@+id/cardMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -159,7 +159,18 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
             android:text="isi catatan nih"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textIsSelectable="true"/>
+
+        <Button
+            android:id="@+id/btChatDosen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="CHAT DOSEN"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
