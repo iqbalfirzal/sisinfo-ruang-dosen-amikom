@@ -27,11 +27,16 @@ public class SplashScreen extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            if (isOnline()) {
-                checkLoggedIn();
-            } else {
-                showNoDataReceivedNoticeDialog();
-            }
+
+            Intent intent = new Intent(SplashScreen.this, MainActivityDosen.class);
+            startActivity(intent);
+            finish();
+
+            //if (isOnline()) {
+            //    checkLoggedIn();
+            //} else {
+            //    showNoDataReceivedNoticeDialog();
+            //}
         } else {
             showNoConnectionNoticeDialog();
         }

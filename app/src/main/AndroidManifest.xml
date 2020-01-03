@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".DashDosen"></activity>
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashTheme">
@@ -27,6 +26,8 @@
         <activity android:name=".LoginMhs" />
         <activity android:name=".LoginDosen" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivityDosen"></activity>
+        <activity android:name=".DashDosen" />
     </application>
 
 </manifest>
