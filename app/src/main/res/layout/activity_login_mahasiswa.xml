@@ -9,87 +9,92 @@
     android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:context=".LoginMhs">
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/circle_box"
-    android:orientation="vertical"
-    android:layout_marginTop="100dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
-    android:elevation="8dp">
-
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
+        android:id="@+id/loginLayMain"
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/profil_login_1" />
-
-    <TextView
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MAHASISWA"
-        android:textSize="40dp"
-        android:paddingBottom="60dp"
-        android:textColor="#BB131313"
-        android:gravity="center"/>
-
-
-    <EditText
-        android:id="@+id/txtNim"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
+        android:above="@id/progressBar"
+        android:background="@drawable/circle_box"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="10dp"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:background="@drawable/circle_box_2"
-        android:drawableLeft="@drawable/ic_action_name"
-        android:hint=" NIM"
-        android:inputType="textPersonName"
-        android:digits="0123456789."/>
-
-    <EditText
-        android:id="@+id/txtPassMhs"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/circle_box_2"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint=" Password"
-        android:drawableLeft="@drawable/ic_action_pass"
-        android:inputType="textPassword"
-        android:digits="0123456789"/>
+        android:elevation="8dp">
 
-    <Button
-        android:id="@+id/loginMhs"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:theme="@style/buttonstyle3"
-        android:background="@drawable/circle_button"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:text="LOGIN" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/profil_login_1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MAHASISWA"
+            android:textSize="40dp"
+            android:paddingBottom="60dp"
+            android:textColor="#BB131313"
+            android:gravity="center"/>
+
+
+        <EditText
+            android:id="@+id/txtNim"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:background="@drawable/circle_box_2"
+            android:drawableLeft="@drawable/ic_action_name"
+            android:hint=" NIM"
+            android:inputType="textPersonName"
+            android:digits="0123456789."/>
+
+        <EditText
+            android:id="@+id/txtPassMhs"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/circle_box_2"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:hint=" Password"
+            android:drawableLeft="@drawable/ic_action_pass"
+            android:inputType="textPassword"
+            android:digits="0123456789"/>
+
+        <Button
+            android:id="@+id/loginMhs"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:theme="@style/buttonstyle3"
+            android:background="@drawable/circle_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:text="LOGIN" />
+    </LinearLayout>
     <ProgressBar
         android:id="@+id/progressBar"
+        android:layout_below="@id/loginLayMain"
         style="?android:attr/progressBarStyle"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:visibility="gone" />
-    <View android:layout_height="20dp" android:layout_width="match_parent"/>
-</LinearLayout>
-
 </RelativeLayout>
