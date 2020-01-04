@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:padding="16sp"
     android:orientation="vertical"
     tools:context="Chat">
 
@@ -12,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_weight="20"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView">
+        android:id="@+id/scrollView"
+        android:paddingStart="10sp"
+        android:paddingEnd="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,10 +24,14 @@
         </LinearLayout>
     </ScrollView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/shadow"
+        android:layout_marginTop="5dp"/>
     <include
         layout="@layout/message_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:layout_marginTop="5dp"/>
+        android:gravity="bottom" />
 </LinearLayout>
