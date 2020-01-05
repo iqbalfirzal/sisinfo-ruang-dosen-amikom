@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,17 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -26,6 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ListDosenAdapter extends RecyclerView.Adapter<ListDosenAdapter.MyViewHolder> {
     ArrayList<ListDosen> list;
     Context mContext;
+    private DatabaseReference firebaseRef;
     public ListDosenAdapter(ArrayList<ListDosen> list, Context context){
         this.list = list;
         this.mContext = context;
@@ -81,6 +86,9 @@ public class ListDosenAdapter extends RecyclerView.Adapter<ListDosenAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        final String lawanChat = new LoginPrefManager(mContext).getLawanChat();
+        final SavedIdClass globalVariable = (SavedIdClass) mContext.getApplicationContext();
+        firebaseRef = FirebaseDatabase.getInstance().getReference();
         String ppurl = list.get(position).getPpurl();
         Glide.with(holder.itemView.getContext()).setDefaultRequestOptions(RequestOptions.placeholderOf(R.drawable.default_user).error(R.drawable.default_user)).load(ppurl).into(holder.foto);
         holder.nama.setText(list.get(position).getFullname());
@@ -93,9 +101,21 @@ public class ListDosenAdapter extends RecyclerView.Adapter<ListDosenAdapter.MyVi
             public void onClick(View v) {
                 holder.getAdapterPosition();
                 String getName = holder.nama.getText().toString();
-                Log.i("INFO !!!!!!", "NAMA YANG DIKIRIM INI"+getName);
-                final SavedIdClass globalVariable = (SavedIdClass) mContext.getApplicationContext();
                 globalVariable.setChatWithName(getName);
+                firebaseRef.child(lawanChat).orderByChild("fullname").equalTo(getName).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshot) {
+                        for (com.google.firebase.database.DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                            String getParent = childSnapshot.getKey();
+                            globalVariable.setChatWith(getParent);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast notice = Toast.makeText(mContext, "Koneksi internet terputus.", Toast.LENGTH_LONG);
+                        notice.show();
+                    }
+                });
                 Intent myIntent = new Intent(mContext, Chat.class);
                 mContext.startActivity(myIntent);
             }

@@ -52,9 +52,11 @@ public class LoginDosen extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String userEmail =  dataSnapshot.getValue(String.class);
+                            String userFullName =  dataSnapshot.child("fullname").getValue(String.class);
                             if(userEmail != null){
                                 saveLoginDetails(username, "dosen", "mhs");
                                 globalVariable.setId(username);
+                                globalVariable.setChatMyUsername(userFullName);
                                 performLogin(userEmail,password);
                             }else{
                                 progressBar.setVisibility(View.GONE);

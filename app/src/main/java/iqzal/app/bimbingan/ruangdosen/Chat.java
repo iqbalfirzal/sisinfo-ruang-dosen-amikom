@@ -9,18 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +25,6 @@ public class Chat extends AppCompatActivity {
     EditText messageArea;
     ScrollView scrollView;
     Firebase reference1, reference2;
-    private DatabaseReference firebaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +37,14 @@ public class Chat extends AppCompatActivity {
         scrollView = (ScrollView)findViewById(R.id.scrollViewChat);
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
-        String lawanChat = new LoginPrefManager(this).getLawanChat();
-
-        firebaseRef = FirebaseDatabase.getInstance().getReference();
-
-        firebaseRef.child(lawanChat).orderByChild("fullname").equalTo(globalVariable.getChatWithName()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-                    globalVariable.setChatWith(childSnapshot.getKey());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + globalVariable.getId() + "/" + globalVariable.getChatWith());
-        reference2 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + globalVariable.getChatWith() + "/" + globalVariable.getId());
-
+        String getMyId = globalVariable.getId();
+        final String getMyUsername = globalVariable.getChatMyUsername();
+        String getChatWithId = globalVariable.getChatWith();
+        final String getChatWithName = globalVariable.getChatWithName();
+        reference1 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getMyId + "/" + getChatWithId);
+        reference2 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getChatWithId + "/" + getMyId);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,9 +54,10 @@ public class Chat extends AppCompatActivity {
                 if(!messageText.equals("")){
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
-                    map.put("sender", globalVariable.getChatMyUsername());
+                    map.put("sender", getMyUsername);
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
+                    messageArea.getText().clear();
                 }
             }
         });
@@ -87,11 +69,11 @@ public class Chat extends AppCompatActivity {
                 String message = map.get("message").toString();
                 String userName = map.get("sender").toString();
 
-                if(userName.equals(globalVariable.getChatMyUsername())){
+                if(userName.equals(getMyUsername)){
                     addMessageBox("Anda :-\n" + message, 1);
                 }
                 else{
-                    addMessageBox(globalVariable.getChatWithName() + " :-\n" + message, 2);
+                    addMessageBox(getChatWithName + " :\n" + message, 2);
                 }
             }
 

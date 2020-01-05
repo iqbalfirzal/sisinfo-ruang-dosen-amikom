@@ -68,7 +68,7 @@ public class LoginMhs extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast notice = Toast.makeText(LoginMhs.this, "Koneksi ke database gagal!", Toast.LENGTH_LONG);
+                            Toast notice = Toast.makeText(LoginMhs.this, "Koneksi ke database gagal.", Toast.LENGTH_LONG);
                             notice.show();
                             finish();
                         }
