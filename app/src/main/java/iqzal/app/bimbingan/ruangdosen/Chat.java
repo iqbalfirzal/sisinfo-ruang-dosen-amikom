@@ -1,6 +1,10 @@
 package iqzal.app.bimbingan.ruangdosen;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -38,6 +42,8 @@ public class Chat extends AppCompatActivity {
         String getChatWithId = globalVariable.getChatWith();
         final String getMyUsername = new LoginPrefManager(this).getChatUserName();
         final String getChatWithName = globalVariable.getChatWithName();
+        getSupportActionBar().setTitle(getChatWithName);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         layout = (LinearLayout)findViewById(R.id.layoutChat);
         sendButton = (ImageView)findViewById(R.id.sendButton);
@@ -71,10 +77,10 @@ public class Chat extends AppCompatActivity {
                 String userName = map.get("sender").toString();
 
                 if(userName.equals(getMyUsername)){
-                    addMessageBox("Anda :\n" + message, 1);
+                    addMessageBox("<b>" + getMyUsername + "</b><br><hr>" + message, 1);
                 }
                 else{
-                    addMessageBox(getChatWithName + " :\n" + message, 2);
+                    addMessageBox("<b>" + getChatWithName + "</b><br><hr>" + message, 2);
                 }
             }
 
@@ -101,18 +107,35 @@ public class Chat extends AppCompatActivity {
     }
 
     public void addMessageBox(String message, int type){
-        TextView textView = new TextView(Chat.this);
-        textView.setText(message);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(0, 0, 0, 10);
-        textView.setLayoutParams(lp);
+        TextView messageText = new TextView(Chat.this);
+        messageText.setText(Html.fromHtml(message)) ;
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        messageText.setPadding(20,20,20,20);
+        messageText.setTextSize(16);
         if(type == 1) {
-            textView.setBackgroundResource(R.drawable.my_message);
+            lp.gravity = Gravity.RIGHT;
+            lp.setMargins(100,10,0,10);
+            messageText.setBackgroundResource(R.drawable.my_message);
         }else {
-            textView.setBackgroundResource(R.drawable.their_message);
+            lp.gravity = Gravity.LEFT;
+            lp.setMargins(0,10,100,10);
+            messageText.setBackgroundResource(R.drawable.their_message);
         }
-        layout.addView(textView);
+        layout.addView(messageText);
+        messageText.setLayoutParams(lp);
         scrollView.fullScroll(View.FOCUS_DOWN);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem)
+    {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
     }
 
 }

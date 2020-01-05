@@ -27,9 +27,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@drawable/shadow"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="4dp"/>
+        android:background="@drawable/shadow" />
     <include
         layout="@layout/message_area"
         android:layout_width="match_parent"
