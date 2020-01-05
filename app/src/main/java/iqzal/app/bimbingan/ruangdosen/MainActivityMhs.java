@@ -24,6 +24,8 @@ public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs
         bottomNav.setItemIconTintList(null);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
+        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
+        globalVariable.setChatWithName("");
         auth = FirebaseAuth.getInstance();
 
         if (savedInstanceState == null) {

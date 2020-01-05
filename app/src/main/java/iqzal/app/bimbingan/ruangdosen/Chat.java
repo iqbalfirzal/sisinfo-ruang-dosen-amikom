@@ -1,5 +1,7 @@
 package iqzal.app.bimbingan.ruangdosen;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Gravity;
@@ -43,6 +45,7 @@ public class Chat extends AppCompatActivity {
         final String getChatWithName = globalVariable.getChatWithName();
         getSupportActionBar().setTitle(getChatWithName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0593D3")));
 
         layout = (LinearLayout)findViewById(R.id.layoutChat);
         sendButton = (ImageView)findViewById(R.id.sendButton);
