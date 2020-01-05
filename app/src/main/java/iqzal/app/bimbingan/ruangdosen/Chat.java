@@ -1,6 +1,5 @@
 package iqzal.app.bimbingan.ruangdosen;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Gravity;
@@ -113,11 +112,11 @@ public class Chat extends AppCompatActivity {
         messageText.setPadding(20,20,20,20);
         messageText.setTextSize(16);
         if(type == 1) {
-            lp.gravity = Gravity.RIGHT;
+            lp.gravity = Gravity.END;
             lp.setMargins(100,10,0,10);
             messageText.setBackgroundResource(R.drawable.my_message);
         }else {
-            lp.gravity = Gravity.LEFT;
+            lp.gravity = Gravity.START;
             lp.setMargins(0,10,100,10);
             messageText.setBackgroundResource(R.drawable.their_message);
         }
