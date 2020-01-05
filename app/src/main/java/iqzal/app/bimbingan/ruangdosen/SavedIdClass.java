@@ -5,7 +5,6 @@ import android.app.Application;
 public class SavedIdClass extends Application{
 
     private String id;
-    private String chatMyUsername;
     private String chatWith;
     private String chatWithName;
 
@@ -15,14 +14,6 @@ public class SavedIdClass extends Application{
 
     public void setId(String anId) {
         id = anId;
-    }
-
-    public String getChatMyUsername() {
-        return chatMyUsername;
-    }
-
-    public void setChatMyUsername(String aChatMyUsername) {
-        chatMyUsername = aChatMyUsername;
     }
 
     public String getChatWith() {

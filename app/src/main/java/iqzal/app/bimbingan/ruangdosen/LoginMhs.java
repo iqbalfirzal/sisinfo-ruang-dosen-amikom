@@ -55,9 +55,8 @@ public class LoginMhs extends AppCompatActivity {
                             String userEmail =  dataSnapshot.child("email").getValue(String.class);
                             String userFullName =  dataSnapshot.child("fullname").getValue(String.class);
                             if(userEmail != null){
-                                saveLoginDetails(username, "mhs", "dosen");
+                                saveLoginDetails(username, "mhs", "dosen", userFullName);
                                 globalVariable.setId(username);
-                                globalVariable.setChatMyUsername(userFullName);
                                 performLogin(userEmail,password);
                             }else{
                                 progressBar.setVisibility(View.GONE);
@@ -82,8 +81,8 @@ public class LoginMhs extends AppCompatActivity {
         });
     }
 
-    private void saveLoginDetails(String id, String status, String lawanChat){
-        new LoginPrefManager(this).saveLoginDetails(id, status, lawanChat);
+    private void saveLoginDetails(String id, String status, String lawanChat, String chatUserName){
+        new LoginPrefManager(this).saveLoginDetails(id, status, lawanChat, chatUserName);
     }
 
     private void performLogin(String emailId, String password) {

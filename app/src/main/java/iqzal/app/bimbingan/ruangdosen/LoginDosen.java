@@ -54,9 +54,8 @@ public class LoginDosen extends AppCompatActivity {
                             String userEmail =  dataSnapshot.getValue(String.class);
                             String userFullName =  dataSnapshot.child("fullname").getValue(String.class);
                             if(userEmail != null){
-                                saveLoginDetails(username, "dosen", "mhs");
+                                saveLoginDetails(username, "dosen", "mhs", userFullName);
                                 globalVariable.setId(username);
-                                globalVariable.setChatMyUsername(userFullName);
                                 performLogin(userEmail,password);
                             }else{
                                 progressBar.setVisibility(View.GONE);
@@ -81,8 +80,8 @@ public class LoginDosen extends AppCompatActivity {
         });
     }
 
-    private void saveLoginDetails(String id, String status, String lawanChat){
-        new LoginPrefManager(this).saveLoginDetails(id, status, lawanChat);
+    private void saveLoginDetails(String id, String status, String lawanChat, String chatUserName){
+        new LoginPrefManager(this).saveLoginDetails(id, status, lawanChat, chatUserName);
     }
 
     private void performLogin(String emailId, String password) {
@@ -96,6 +95,7 @@ public class LoginDosen extends AppCompatActivity {
                 }else{
                     Intent intent = new Intent(LoginDosen.this, MainActivityDosen.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

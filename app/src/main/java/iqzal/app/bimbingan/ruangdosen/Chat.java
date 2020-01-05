@@ -31,18 +31,19 @@ public class Chat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
+
+        Firebase.setAndroidContext(this);
+        String getMyId = globalVariable.getId();
+        String getChatWithId = globalVariable.getChatWith();
+        final String getMyUsername = new LoginPrefManager(this).getChatUserName();
+        final String getChatWithName = globalVariable.getChatWithName();
+
         layout = (LinearLayout)findViewById(R.id.layoutChat);
         sendButton = (ImageView)findViewById(R.id.sendButton);
         messageArea = (EditText)findViewById(R.id.messageArea);
         scrollView = (ScrollView)findViewById(R.id.scrollViewChat);
 
-        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
-
-        Firebase.setAndroidContext(this);
-        String getMyId = globalVariable.getId();
-        final String getMyUsername = globalVariable.getChatMyUsername();
-        String getChatWithId = globalVariable.getChatWith();
-        final String getChatWithName = globalVariable.getChatWithName();
         reference1 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getMyId + "/" + getChatWithId);
         reference2 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getChatWithId + "/" + getMyId);
 
@@ -70,7 +71,7 @@ public class Chat extends AppCompatActivity {
                 String userName = map.get("sender").toString();
 
                 if(userName.equals(getMyUsername)){
-                    addMessageBox("Anda :-\n" + message, 1);
+                    addMessageBox("Anda :\n" + message, 1);
                 }
                 else{
                     addMessageBox(getChatWithName + " :\n" + message, 2);
@@ -101,17 +102,16 @@ public class Chat extends AppCompatActivity {
 
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(Chat.this);
+        textView = findViewById(R.id.messageText);
         textView.setText(message);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 0, 0, 10);
         textView.setLayoutParams(lp);
-
         if(type == 1) {
             textView.setBackgroundResource(R.drawable.my_message);
         }else {
             textView.setBackgroundResource(R.drawable.their_message);
         }
-
         layout.addView(textView);
         scrollView.fullScroll(View.FOCUS_DOWN);
     }
