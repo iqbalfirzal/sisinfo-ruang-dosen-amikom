@@ -102,7 +102,6 @@ public class Chat extends AppCompatActivity {
 
     public void addMessageBox(String message, int type){
         TextView textView = new TextView(Chat.this);
-        textView = findViewById(R.id.messageText);
         textView.setText(message);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 0, 0, 10);
