@@ -70,7 +70,7 @@ public class ListDosenFragment extends Fragment{
                         for(DataSnapshot ds : dataSnapshot.getChildren()){
                             list.add(ds.getValue(ListDosen.class));
                         }
-                        ListDosenAdapter listDosenAdapter = new ListDosenAdapter(list);
+                        ListDosenAdapter listDosenAdapter = new ListDosenAdapter(list, getActivity());
                         recyclerView.setAdapter(listDosenAdapter);
                     }
                 }
@@ -109,7 +109,7 @@ public class ListDosenFragment extends Fragment{
                 myList.add(object);
             }
         }
-        ListDosenAdapter listDosenAdapter = new ListDosenAdapter(myList);
+        ListDosenAdapter listDosenAdapter = new ListDosenAdapter(myList, getActivity());
         recyclerView.setAdapter(listDosenAdapter);
     }
 

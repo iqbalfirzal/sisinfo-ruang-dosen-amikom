@@ -49,13 +49,15 @@ public class LoginMhs extends AppCompatActivity {
                 final String password = sandi.getText().toString() ;
                 progressBar.setVisibility(View.VISIBLE);
                 if(username.length() > 0 && password.length() > 0){
-                    firebaseRef.child("mhs").child(username).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
+                    firebaseRef.child("mhs").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String userEmail =  dataSnapshot.getValue(String.class);
+                            String userEmail =  dataSnapshot.child("email").getValue(String.class);
+                            String userFullName =  dataSnapshot.child("fullname").getValue(String.class);
                             if(userEmail != null){
-                                saveLoginDetails(username, "mhs");
+                                saveLoginDetails(username, "mhs", "dosen");
                                 globalVariable.setId(username);
+                                globalVariable.setChatMyUsername(userFullName);
                                 performLogin(userEmail,password);
                             }else{
                                 progressBar.setVisibility(View.GONE);
@@ -80,8 +82,8 @@ public class LoginMhs extends AppCompatActivity {
         });
     }
 
-    private void saveLoginDetails(String id, String status){
-        new LoginPrefManager(this).saveLoginDetails(id, status);
+    private void saveLoginDetails(String id, String status, String lawanChat){
+        new LoginPrefManager(this).saveLoginDetails(id, status, lawanChat);
     }
 
     private void performLogin(String emailId, String password) {

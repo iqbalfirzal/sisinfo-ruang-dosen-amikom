@@ -2,10 +2,14 @@ package iqzal.app.bimbingan.ruangdosen;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,8 +25,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ListDosenAdapter extends RecyclerView.Adapter<ListDosenAdapter.MyViewHolder> {
     ArrayList<ListDosen> list;
-    public ListDosenAdapter(ArrayList<ListDosen> list){
+    Context mContext;
+    public ListDosenAdapter(ArrayList<ListDosen> list, Context context){
         this.list = list;
+        this.mContext = context;
     }
     @NonNull
     @Override
@@ -31,25 +37,10 @@ public class ListDosenAdapter extends RecyclerView.Adapter<ListDosenAdapter.MyVi
         return new MyViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String ppurl = list.get(position).getPpurl();
-        Glide.with(holder.itemView.getContext()).setDefaultRequestOptions(RequestOptions.placeholderOf(R.drawable.default_user).error(R.drawable.default_user)).load(ppurl).into(holder.foto);
-        holder.nama.setText(list.get(position).getFullname());
-        holder.diruangan.setText(list.get(position).getDiruangan());
-        holder.ruang.setText(list.get(position).getRuang());
-        holder.waktu.setText("diupdate : "+list.get(position).getWaktu());
-        holder.catatan.setText(list.get(position).getCatatan());
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nama,diruangan,ruang,waktu, catatan;
         CircleImageView foto;
+        Button btChat;
         LinearLayout hidden_layout, trigger;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
@@ -59,33 +50,60 @@ public class ListDosenAdapter extends RecyclerView.Adapter<ListDosenAdapter.MyVi
             ruang = itemView.findViewById(R.id.cardRuangDosen);
             waktu = itemView.findViewById(R.id.cardWaktu);
             catatan = itemView.findViewById(R.id.cardCatatan);
+            btChat = itemView.findViewById(R.id.btChatDosen);
             hidden_layout = itemView.findViewById(R.id.hidden_layout);
             trigger = itemView.findViewById(R.id.cardMain);
-            trigger.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (hidden_layout.getVisibility() == View.GONE) {
-                hidden_layout.animate()
-                        .translationY(hidden_layout.getBaseline()).alpha(1.0f)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationStart(Animator animation) {
-                                super.onAnimationStart(animation);
-                                hidden_layout.setVisibility(View.VISIBLE);
-                                hidden_layout.setAlpha(0.0f);
-                            }
-                        });
-            } else {
-                hidden_layout.setVisibility(View.GONE);
-                TranslateAnimation animate = new TranslateAnimation(0,0, hidden_layout.getHeight(), 0);
-                animate.setDuration(500);
-                animate.setFillAfter(true);
-                hidden_layout.startAnimation(animate);
-            }
+            trigger.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (hidden_layout.getVisibility() == View.GONE) {
+                        hidden_layout.animate()
+                                .translationY(hidden_layout.getBaseline()).alpha(1.0f)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationStart(Animator animation) {
+                                        super.onAnimationStart(animation);
+                                        hidden_layout.setVisibility(View.VISIBLE);
+                                        hidden_layout.setAlpha(0.0f);
+                                    }
+                                });
+                    } else {
+                        hidden_layout.setVisibility(View.GONE);
+                        TranslateAnimation animate = new TranslateAnimation(0,0, hidden_layout.getHeight(), 0);
+                        animate.setDuration(500);
+                        animate.setFillAfter(true);
+                        hidden_layout.startAnimation(animate);
+                    }
+                }
+            });
         }
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        String ppurl = list.get(position).getPpurl();
+        Glide.with(holder.itemView.getContext()).setDefaultRequestOptions(RequestOptions.placeholderOf(R.drawable.default_user).error(R.drawable.default_user)).load(ppurl).into(holder.foto);
+        holder.nama.setText(list.get(position).getFullname());
+        holder.diruangan.setText(list.get(position).getDiruangan());
+        holder.ruang.setText(list.get(position).getRuang());
+        holder.waktu.setText("diupdate : "+list.get(position).getWaktu());
+        holder.catatan.setText(list.get(position).getCatatan());
+        holder.btChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.getAdapterPosition();
+                String getName = holder.nama.getText().toString();
+                Log.i("INFO !!!!!!", "NAMA YANG DIKIRIM INI"+getName);
+                final SavedIdClass globalVariable = (SavedIdClass) mContext.getApplicationContext();
+                globalVariable.setChatWithName(getName);
+                Intent myIntent = new Intent(mContext, Chat.class);
+                mContext.startActivity(myIntent);
+            }
+        });
+    }
 
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
 }

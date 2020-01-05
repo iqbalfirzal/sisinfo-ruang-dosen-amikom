@@ -21,23 +21,23 @@ public class SavedIdClass extends Application{
         return chatMyUsername;
     }
 
-    public void setChatMyUsername(String anChatMyUsername) {
-        chatMyUsername = anChatMyUsername;
+    public void setChatMyUsername(String aChatMyUsername) {
+        chatMyUsername = aChatMyUsername;
     }
 
     public String getChatWith() {
         return chatWith;
     }
 
-    public void setChatWith(String anChatWith) {
-        chatWith = anChatWith;
+    public void setChatWith(String aChatWith) {
+        chatWith = aChatWith;
     }
 
     public String getChatWithName() {
         return chatWithName;
     }
 
-    public void setChatWithName(String anChatWithName) {
-        chatWithName = anChatWithName;
+    public void setChatWithName(String aChatWithName) {
+        chatWithName = aChatWithName;
     }
 }
