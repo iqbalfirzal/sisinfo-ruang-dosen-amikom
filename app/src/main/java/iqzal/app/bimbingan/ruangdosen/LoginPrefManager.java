@@ -10,12 +10,11 @@ public class LoginPrefManager {
         this.context = context;
     }
 
-    public void saveLoginDetails(String id, String status, String lawanChat, String chatUserName) {
+    public void saveLoginDetails(String id, String status, String chatUserName) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("LoginDetails", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("IdUser", id);
         editor.putString("StatusUser", status);
-        editor.putString("LawanChat", lawanChat);
         editor.putString("ChatUserName", chatUserName);
         editor.commit();
     }
@@ -34,11 +33,6 @@ public class LoginPrefManager {
     public String getStatusLoggedIn() {
         SharedPreferences sharedPreferences = context.getSharedPreferences("LoginDetails", Context.MODE_PRIVATE);
         return sharedPreferences.getString("StatusUser", "");
-    }
-
-    public String getLawanChat() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("LoginDetails", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("LawanChat", "");
     }
 
     public String getChatUserName() {

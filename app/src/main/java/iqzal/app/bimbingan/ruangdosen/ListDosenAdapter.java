@@ -86,7 +86,6 @@ public class ListDosenAdapter extends RecyclerView.Adapter<ListDosenAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        final String lawanChat = new LoginPrefManager(mContext).getLawanChat();
         final SavedIdClass globalVariable = (SavedIdClass) mContext.getApplicationContext();
         firebaseRef = FirebaseDatabase.getInstance().getReference();
         String ppurl = list.get(position).getPpurl();
@@ -102,7 +101,7 @@ public class ListDosenAdapter extends RecyclerView.Adapter<ListDosenAdapter.MyVi
                 holder.getAdapterPosition();
                 String getName = holder.nama.getText().toString();
                 globalVariable.setChatWithName(getName);
-                firebaseRef.child(lawanChat).orderByChild("fullname").equalTo(getName).addListenerForSingleValueEvent(new ValueEventListener() {
+                firebaseRef.child("dosen").orderByChild("fullname").equalTo(getName).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshot) {
                         for (com.google.firebase.database.DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
