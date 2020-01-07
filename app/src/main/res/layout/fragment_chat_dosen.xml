@@ -9,20 +9,19 @@
         android:id="@+id/fakeActionBarChat"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:elevation="8dp">
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        android:elevation="4dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Chat"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -54,8 +53,8 @@
             android:visibility="gone"/>
 
         <ListView
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:divider="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/chatListDosen" />

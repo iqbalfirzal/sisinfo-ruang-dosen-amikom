@@ -167,7 +167,7 @@ public class ChatDosenFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String dataList = dataSnapshot.getValue(String.class);
                     newList.add(dataList);
-                    chatList.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, newList));
+                    chatList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item, R.id.textChatListItem, newList));
                 }
 
                 @Override
