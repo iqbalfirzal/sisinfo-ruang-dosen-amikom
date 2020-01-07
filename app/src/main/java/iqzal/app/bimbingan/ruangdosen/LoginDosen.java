@@ -48,10 +48,10 @@ public class LoginDosen extends AppCompatActivity {
                 final String password = sandi.getText().toString() ;
                 progressBar.setVisibility(View.VISIBLE);
                 if(username.length() > 0 && password.length() > 0){
-                    firebaseRef.child("dosen").child(username).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
+                    firebaseRef.child("dosen").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String userEmail =  dataSnapshot.getValue(String.class);
+                            String userEmail =  dataSnapshot.child("email").getValue(String.class);
                             String userFullName =  dataSnapshot.child("fullname").getValue(String.class);
                             if(userEmail != null){
                                 saveLoginDetails(username, "dosen", userFullName);
