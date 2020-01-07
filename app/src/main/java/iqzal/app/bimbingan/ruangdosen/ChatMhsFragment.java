@@ -55,6 +55,7 @@ public class ChatMhsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final SavedIdClass globalVariable = (SavedIdClass) getActivity().getApplicationContext();
         final String getMyId = globalVariable.getId();
+        globalVariable.setChatWithName("");
 
         chatList = (ListView) view.findViewById(R.id.chatList);
         noChatText = (TextView) view.findViewById(R.id.noChatText);
@@ -134,7 +135,7 @@ public class ChatMhsFragment extends Fragment {
     private void nextProccess(ArrayList<String> id){
         final Object[] listStringArray = id.toArray();
         for(int i = 0; i<listStringArray.length; i++){
-                firebaseRef.child("dosen").child((String) listStringArray[i]).child("fullname").orderByChild("fullname").addListenerForSingleValueEvent(new ValueEventListener() {
+                firebaseRef.child("dosen").child((String) listStringArray[i]).child("fullname").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String dataList = dataSnapshot.getValue(String.class);

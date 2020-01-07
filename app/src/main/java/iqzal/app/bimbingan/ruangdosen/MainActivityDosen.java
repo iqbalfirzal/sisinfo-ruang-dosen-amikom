@@ -20,6 +20,9 @@ public class MainActivityDosen extends AppCompatActivity {
         bottomNav.setItemIconTintList(null);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
+        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
+        globalVariable.setChatWithName("");
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_dosen,
                     new DashDosenFragment()).commit();

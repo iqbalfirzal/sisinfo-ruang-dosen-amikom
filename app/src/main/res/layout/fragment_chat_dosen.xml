@@ -11,18 +11,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/noChatText"
+            android:id="@+id/noChatTextDosen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Belum ada chat."
+            android:text="Belum ada chat dari mahasiswa."
             android:visibility="gone"/>
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/chatList" />
+            android:id="@+id/chatListDosen" />
 
     </LinearLayout>
 
