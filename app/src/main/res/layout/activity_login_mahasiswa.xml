@@ -16,8 +16,8 @@
         android:background="@drawable/circle_box"
         android:orientation="vertical"
         android:layout_marginTop="100dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
         android:elevation="8dp">
 
         <ImageView
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="MAHASISWA"
-            android:textSize="40dp"
+            android:textSize="36dp"
             android:paddingBottom="60dp"
             android:textColor="#BB131313"
             android:gravity="center"/>

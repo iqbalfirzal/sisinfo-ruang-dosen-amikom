@@ -6,9 +6,43 @@
     tools:context=".ChatDosenFragment">
 
     <LinearLayout
+        android:id="@+id/fakeActionBarChat"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:elevation="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Chat"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/chatHeaderBg"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#BC16CFF3"
+        android:layout_below="@id/fakeActionBarChat"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/draw_wave"
+        android:layout_below="@id/chatHeaderBg"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@id/fakeActionBarChat">
 
         <TextView
             android:id="@+id/noChatTextDosen"
@@ -20,6 +54,8 @@
             android:visibility="gone"/>
 
         <ListView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/chatListDosen" />
