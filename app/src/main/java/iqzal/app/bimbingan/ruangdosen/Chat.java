@@ -95,7 +95,7 @@ public class Chat extends AppCompatActivity {
                             "</font><br>","<i>" + time + "<i>", 1);
                 }
                 else{
-                    addMessageBox("<b>" + getMyUsername +
+                    addMessageBox("<b>" + getChatWithName +
                             "</b><br><hr><font>" + message +
                             "</font><br>","<i>" + time + "<i><br>", 2);
                 }
