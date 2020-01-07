@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +27,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
@@ -39,6 +39,7 @@ public class ChatDosenFragment extends Fragment {
     DatabaseReference firebaseRef;
     ListView chatList;
     TextView noChatText;
+    ImageView noChatIcon;
     ArrayList<String> al = new ArrayList<>();
     ArrayList<String> newList = new ArrayList<>();
     int totalChats = 0;
@@ -62,6 +63,7 @@ public class ChatDosenFragment extends Fragment {
 
         chatList = (ListView) view.findViewById(R.id.chatListDosen);
         noChatText = (TextView) view.findViewById(R.id.noChatTextDosen);
+        noChatIcon = (ImageView) view.findViewById(R.id.noChatIconDosen);
 
         String url = "https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getMyId +".json";
 
@@ -151,6 +153,7 @@ public class ChatDosenFragment extends Fragment {
         }
 
         if(totalChats < 1){
+            noChatIcon.setVisibility(View.VISIBLE);
             noChatText.setVisibility(View.VISIBLE);
             chatList.setVisibility(View.GONE);
         }

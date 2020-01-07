@@ -27,7 +27,7 @@
     <View
         android:id="@+id/chatHeaderBg"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="350dp"
         android:background="#BC16CFF3"
         android:layout_below="@id/fakeActionBarChat"/>
     <View
@@ -42,18 +42,29 @@
         android:orientation="vertical"
         android:layout_below="@id/fakeActionBarChat">
 
+        <ImageView
+            android:id="@+id/noChatIconMhs"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_no_chat"
+            android:visibility="gone"/>
+
         <TextView
             android:id="@+id/noChatText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Belum ada chat ke dosen."
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="Belum ada chat ke dosen..."
             android:visibility="gone"/>
 
         <ListView
-            android:padding="10dp"
-            android:divider="@android:color/transparent"
+            android:layout_margin="15dp"
+            android:divider="@drawable/list_divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/chatList" />

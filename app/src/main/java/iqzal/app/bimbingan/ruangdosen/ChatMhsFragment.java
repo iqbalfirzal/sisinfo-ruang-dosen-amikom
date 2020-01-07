@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class ChatMhsFragment extends Fragment {
     DatabaseReference firebaseRef;
     ListView chatList;
     TextView noChatText;
+    ImageView noChatIcon;
     ArrayList<String> al = new ArrayList<>();
     ArrayList<String> newList = new ArrayList<>();
     int totalChats = 0;
@@ -61,6 +63,7 @@ public class ChatMhsFragment extends Fragment {
 
         chatList = (ListView) view.findViewById(R.id.chatList);
         noChatText = (TextView) view.findViewById(R.id.noChatText);
+        noChatIcon = (ImageView) view.findViewById(R.id.noChatIconMhs);
 
         String url = "https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getMyId +".json";
 
@@ -150,6 +153,7 @@ public class ChatMhsFragment extends Fragment {
         }
 
         if(totalChats < 1){
+            noChatIcon.setVisibility(View.VISIBLE);
             noChatText.setVisibility(View.VISIBLE);
             chatList.setVisibility(View.GONE);
         }
