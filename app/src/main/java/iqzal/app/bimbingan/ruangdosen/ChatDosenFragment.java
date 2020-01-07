@@ -1,5 +1,6 @@
 package iqzal.app.bimbingan.ruangdosen;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -24,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
@@ -89,6 +92,7 @@ public class ChatDosenFragment extends Fragment {
                             String getParent = childSnapshot.getKey();
                             globalVariable.setChatWith(getParent);
                         }
+                        startActivity(new Intent(getActivity(), Chat.class));
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -96,7 +100,30 @@ public class ChatDosenFragment extends Fragment {
                         notice.show();
                     }
                 });
-                startActivity(new Intent(getActivity(), Chat.class));
+            }
+        });
+
+        chatList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String getChatWithName = newList.get(position);
+                globalVariable.setChatWithName(getChatWithName);
+                firebaseRef.child("mhs").orderByChild("fullname").equalTo(getChatWithName).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                            String getParent = childSnapshot.getKey();
+                            globalVariable.setChatWith(getParent);
+                        }
+                        deleteConfirm();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast notice = Toast.makeText(getActivity(), "Koneksi internet terputus.", Toast.LENGTH_LONG);
+                        notice.show();
+                    }
+                });
+                return false;
             }
         });
     }
@@ -150,5 +177,32 @@ public class ChatDosenFragment extends Fragment {
         }
         noChatText.setVisibility(View.GONE);
         chatList.setVisibility(View.VISIBLE);
+    }
+
+    private void deleteConfirm() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setTitle("Hapus Chat");
+        builder.setMessage("Yakin ingin menghapus chat?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final SavedIdClass globalVariable = (SavedIdClass) getActivity().getApplicationContext();
+                String myId = globalVariable.getId();
+                String chatWith = globalVariable.getChatWith();
+                firebaseRef.child("chats").child(myId).child(chatWith).removeValue();
+                getFragmentManager().popBackStack();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container_dosen, new ChatDosenFragment()).commit();
+            }
+        });
+        builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final SavedIdClass globalVariable = (SavedIdClass) getActivity().getApplicationContext();
+                globalVariable.setChatWithName("");
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }
