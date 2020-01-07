@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#D0FFFFFF"
+    android:background="#A1FFFFFF"
     android:gravity="bottom"
     android:orientation="horizontal"
     android:weightSum="10"
@@ -16,7 +16,7 @@
         android:background="@drawable/circle_box_6"
         android:textColorHint="@android:color/darker_gray"
         android:textColor="@color/black"
-        android:hint="Write a message..."
+        android:hint="Tulis pesan..."
         android:id="@+id/messageArea"
         android:maxHeight="120dp"
         />
