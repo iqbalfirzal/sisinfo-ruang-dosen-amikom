@@ -26,6 +26,8 @@ public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         globalVariable.setChatWithName("");
+        String myChatId = globalVariable.getId();
+
         auth = FirebaseAuth.getInstance();
 
         if (savedInstanceState == null) {
@@ -42,9 +44,11 @@ public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs
 
                     switch (item.getItemId()) {
                         case R.id.nav_listdosen_mhs:
+                            getSupportFragmentManager().popBackStack();
                             selectedFragment = new ListDosenFragment();
                             break;
                         case R.id.nav_chat_mhs:
+                            getSupportFragmentManager().popBackStack();
                             selectedFragment = new ChatMhsFragment();
                             break;
                     }

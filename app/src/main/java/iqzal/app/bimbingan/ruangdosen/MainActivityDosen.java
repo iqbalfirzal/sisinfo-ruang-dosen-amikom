@@ -37,9 +37,11 @@ public class MainActivityDosen extends AppCompatActivity {
 
                     switch (item.getItemId()) {
                         case R.id.nav_dash_dosen:
+                            getSupportFragmentManager().popBackStack();
                             selectedFragment = new DashDosenFragment();
                             break;
                         case R.id.nav_chat_dosen:
+                            getSupportFragmentManager().popBackStack();
                             selectedFragment = new ChatDosenFragment();
                             break;
                     }
