@@ -6,10 +6,21 @@
     android:background="@drawable/listview_bg"
     tools:context=".MainActivityDosen">
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:src="@drawable/ic_chat_list"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:id="@+id/textChatListItem"
         android:textSize="18sp"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:text="Chat List Item Name"/>
 </LinearLayout>
