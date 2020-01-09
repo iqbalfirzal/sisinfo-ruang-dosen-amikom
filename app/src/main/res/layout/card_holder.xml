@@ -18,7 +18,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/gradient_2"
+            android:foreground="?selectableItemBackground"
             android:elevation="4dp"
+            android:clickable="true"
             android:weightSum="2">
 
             <de.hdodenhof.circleimageview.CircleImageView
