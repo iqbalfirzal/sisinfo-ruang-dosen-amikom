@@ -32,6 +32,7 @@ public class Chat extends AppCompatActivity {
     LinearLayout layout;
     ImageView sendButton;
     EditText messageArea;
+    TextView noChatBubbleText;
     ScrollView scrollView;
     Firebase reference1, reference2;
 
@@ -58,6 +59,7 @@ public class Chat extends AppCompatActivity {
         layout = (LinearLayout)findViewById(R.id.layoutChat);
         sendButton = (ImageView)findViewById(R.id.sendButton);
         messageArea = (EditText)findViewById(R.id.messageArea);
+        noChatBubbleText = (TextView) findViewById(R.id.noChatBubbleText);
         scrollView = (ScrollView)findViewById(R.id.scrollViewChat);
 
         reference1 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getMyId + "/" + getChatWithId);
@@ -76,7 +78,9 @@ public class Chat extends AppCompatActivity {
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
                     messageArea.getText().clear();
-                    scrollView.fullScroll(View.FOCUS_DOWN);
+                    messageArea.findFocus();
+                    messageArea.requestFocus();
+                    scrollView.fullScroll(View.SCROLL_INDICATOR_END);
                 }
             }
         });
@@ -88,17 +92,23 @@ public class Chat extends AppCompatActivity {
                 String message = map.get("message").toString();
                 String userName = map.get("sender").toString();
                 String time = map.get("time").toString();
-
-                if(userName.equals(getMyUsername)){
-                    addMessageBox("<b>" + getMyUsername +
-                            "</b><br><hr><font>" + message +
-                            "</font><br>","<i>" + time + "<i>", 1);
+                if(!map.equals("")){
+                    noChatBubbleText.setVisibility(View.GONE);
+                    if(userName.equals(getMyUsername)){
+                        addMessageBox("<b>" + getMyUsername +
+                                "</b><br><hr><font>" + message +
+                                "</font><br>","<i>" + time + "<i>", 1);
+                    }
+                    else{
+                        addMessageBox("<b>" + getChatWithName +
+                                "</b><br><hr><font>" + message +
+                                "</font><br>","<i>" + time + "<i><br>", 2);
+                    }
+                }else{
+                    scrollView.setVisibility(View.GONE);
+                    noChatBubbleText.setVisibility(View.VISIBLE);
                 }
-                else{
-                    addMessageBox("<b>" + getChatWithName +
-                            "</b><br><hr><font>" + message +
-                            "</font><br>","<i>" + time + "<i><br>", 2);
-                }
+                scrollView.fullScroll(View.FOCUS_DOWN);
             }
 
             @Override

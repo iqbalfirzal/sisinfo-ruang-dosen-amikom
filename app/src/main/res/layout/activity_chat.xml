@@ -10,6 +10,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/noChatBubbleText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="Belum ada chat" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_weight="20"
