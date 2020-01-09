@@ -38,7 +38,7 @@
         android:gravity="center"/>
 
 
-    <EditText
+        <EditText
         android:id="@+id/txtNik"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -46,10 +46,11 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="center"
         android:background="@drawable/circle_box_2"
-        android:drawableLeft="@drawable/ic_action_name"
         android:digits="0123456789"
         android:ems="10"
-        android:hint="   NIK"
+        android:drawableLeft="@drawable/ic_user_login"
+        android:hint="NIK"
+            android:drawablePadding="10dp"
         android:textSize="16dp"
         android:inputType="textPersonName" />
 
@@ -63,8 +64,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:drawableLeft="@drawable/ic_action_pass"
-        android:hint="   Password"
+        android:drawableLeft="@drawable/ic_password_login"
+        android:hint="Password"
+        android:drawablePadding="10dp"
         android:inputType="textPassword"
         android:digits="0123456789"/>
 

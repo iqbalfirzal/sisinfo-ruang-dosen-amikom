@@ -49,8 +49,9 @@
             android:layout_gravity="center"
             android:ems="10"
             android:background="@drawable/circle_box_2"
-            android:drawableLeft="@drawable/ic_action_name"
-            android:hint=" NIM"
+            android:drawableLeft="@drawable/ic_user_login"
+            android:hint="NIM"
+            android:drawablePadding="10dp"
             android:inputType="textPersonName"
             android:digits="0123456789."/>
 
@@ -60,12 +61,13 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:drawablePadding="10dp"
             android:background="@drawable/circle_box_2"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:ems="10"
             android:hint=" Password"
-            android:drawableLeft="@drawable/ic_action_pass"
+            android:drawableLeft="@drawable/ic_password_login"
             android:inputType="textPassword"
             android:digits="0123456789"/>
 
