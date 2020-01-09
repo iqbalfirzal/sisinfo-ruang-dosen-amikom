@@ -50,7 +50,7 @@
         android:ems="10"
         android:drawableLeft="@drawable/ic_user_login"
         android:hint="NIK"
-            android:drawablePadding="10dp"
+        android:drawablePadding="10dp"
         android:textSize="16dp"
         android:inputType="textPersonName" />
 
