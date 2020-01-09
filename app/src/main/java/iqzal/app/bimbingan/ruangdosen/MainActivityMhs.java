@@ -26,7 +26,6 @@ public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         globalVariable.setChatWithName("");
-        String myChatId = globalVariable.getId();
 
         auth = FirebaseAuth.getInstance();
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/graylight"
+    android:background="@drawable/diagonal_gradient_2"
     android:orientation="vertical"
     tools:context=".DashDosenFragment">
     <RelativeLayout
@@ -195,8 +195,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:background="@drawable/bg_button_1"

@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/nav_listdosen_mhs"
-        android:icon="@drawable/ic_list"
+        android:icon="@drawable/ic_list_selector"
         android:title="List Dosen" />
 
     <item
         android:id="@+id/nav_chat_mhs"
-        android:icon="@drawable/ic_chat"
+        android:icon="@drawable/ic_chat_selector"
         android:title="Chat" />
 </menu>
