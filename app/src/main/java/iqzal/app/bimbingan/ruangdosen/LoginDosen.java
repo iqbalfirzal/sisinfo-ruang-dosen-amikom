@@ -80,6 +80,12 @@ public class LoginDosen extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(LoginDosen.this, Choose.class));
+        finish();
+    }
+
     private void saveLoginDetails(String id, String status, String chatUserName){
         new LoginPrefManager(this).saveLoginDetails(id, status, chatUserName);
     }
