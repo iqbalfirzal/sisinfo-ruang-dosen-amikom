@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="unlabeled"
+        app:itemBackground="@drawable/nav_item_bg"
         app:menu="@menu/bottom_nav_menu_dosen"
         android:background="@color/white" />
 

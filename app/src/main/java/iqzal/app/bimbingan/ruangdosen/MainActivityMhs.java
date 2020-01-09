@@ -21,7 +21,7 @@ public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs
         setContentView(R.layout.activity_main_mhs);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_mhs);
-        bottomNav.getItemIconTintList(in);
+        bottomNav.setItemIconTintList(null);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();

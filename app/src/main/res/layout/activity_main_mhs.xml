@@ -24,5 +24,6 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_nav_menu_mhs"
         app:labelVisibilityMode="unlabeled"
+        app:itemBackground="@drawable/nav_item_bg"
         android:background="@color/white" />
 </RelativeLayout>
