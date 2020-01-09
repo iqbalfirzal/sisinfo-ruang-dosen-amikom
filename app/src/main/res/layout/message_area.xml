@@ -28,6 +28,6 @@
         android:layout_marginLeft="4dp"
         android:layout_marginBottom="2dp"
         android:layout_weight="9"
-        android:src="@drawable/ic_send_24dp"
+        android:src="@drawable/ic_send"
         android:id="@+id/sendButton"/>
 </LinearLayout>
