@@ -36,7 +36,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         String senderid = extraData.get("senderid");
         String sendername = extraData.get("sendername");
-        String message = extraData.get("message");
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, "RuDoApp")
