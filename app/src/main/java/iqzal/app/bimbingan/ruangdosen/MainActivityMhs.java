@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs.ItemClickListener{
 
@@ -26,7 +27,8 @@ public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         globalVariable.setChatWithName("");
-
+        final String getMyId = globalVariable.getId();
+        FirebaseMessaging.getInstance().subscribeToTopic(getMyId);
         auth = FirebaseAuth.getInstance();
 
         if (savedInstanceState == null) {

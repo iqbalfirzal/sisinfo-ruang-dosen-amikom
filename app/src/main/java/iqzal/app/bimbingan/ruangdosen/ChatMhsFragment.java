@@ -3,6 +3,7 @@ package iqzal.app.bimbingan.ruangdosen;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,7 +118,9 @@ public class ChatMhsFragment extends Fragment {
                             String getParent = childSnapshot.getKey();
                             globalVariable.setChatWith(getParent);
                         }
-                        deleteConfirm();
+                        String myId = globalVariable.getId();
+                        String deleteChatWith = globalVariable.getChatWith();
+                        deleteConfirm(deleteChatWith, myId);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -182,7 +185,7 @@ public class ChatMhsFragment extends Fragment {
         chatList.setVisibility(View.VISIBLE);
     }
 
-    private void deleteConfirm() {
+    private void deleteConfirm(final String chatWith, final String myId) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
         builder.setTitle("Hapus Chat");
         builder.setMessage("Yakin ingin menghapus chat?");
@@ -190,9 +193,6 @@ public class ChatMhsFragment extends Fragment {
         builder.setPositiveButton("Iya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final SavedIdClass globalVariable = (SavedIdClass) getActivity().getApplicationContext();
-                String myId = globalVariable.getId();
-                String chatWith = globalVariable.getChatWith();
                 firebaseRef.child("chats").child(myId).child(chatWith).removeValue();
                 getFragmentManager().popBackStack();
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container_mhs, new ChatMhsFragment()).commit();

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivityDosen extends AppCompatActivity {
 
@@ -22,6 +23,8 @@ public class MainActivityDosen extends AppCompatActivity {
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         globalVariable.setChatWithName("");
+        final String getMyId = globalVariable.getId();
+        FirebaseMessaging.getInstance().subscribeToTopic(getMyId);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_dosen,

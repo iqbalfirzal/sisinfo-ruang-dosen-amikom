@@ -56,7 +56,7 @@ public class LoginDosen extends AppCompatActivity {
                             if(userEmail != null){
                                 saveLoginDetails(username, "dosen", userFullName);
                                 globalVariable.setId(username);
-                                performLogin(userEmail,password);
+                                performLogin(userEmail, password);
                             }else{
                                 progressBar.setVisibility(View.GONE);
                                 Toast notice = Toast.makeText(LoginDosen.this, "NIK tidak terdaftar!", Toast.LENGTH_LONG);

@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class LoginMhs extends AppCompatActivity {
     ProgressBar progressBar;
@@ -57,7 +60,7 @@ public class LoginMhs extends AppCompatActivity {
                             if(userEmail != null){
                                 saveLoginDetails(username, "mhs", userFullName);
                                 globalVariable.setId(username);
-                                performLogin(userEmail,password);
+                                performLogin(userEmail, username, password);
                             }else{
                                 progressBar.setVisibility(View.GONE);
                                 Toast notice = Toast.makeText(LoginMhs.this, "NIM tidak terdaftar!", Toast.LENGTH_LONG);
@@ -91,7 +94,7 @@ public class LoginMhs extends AppCompatActivity {
         new LoginPrefManager(this).saveLoginDetails(id, status, chatUserName);
     }
 
-    private void performLogin(String emailId, String password) {
+    private void performLogin(String emailId, final String username, String password) {
         auth.signInWithEmailAndPassword(emailId,password).addOnCompleteListener(LoginMhs.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -100,6 +103,13 @@ public class LoginMhs extends AppCompatActivity {
                     Toast.makeText(LoginMhs.this, "Password salah.",
                             Toast.LENGTH_LONG).show();
                 }else{
+                    FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( LoginMhs.this,  new OnSuccessListener<InstanceIdResult>() {
+                        @Override
+                        public void onSuccess(InstanceIdResult instanceIdResult) {
+                            String token = instanceIdResult.getToken();
+                            firebaseRef.child("mhs").child(username).child("token").setValue(token);
+                        }
+                    });
                     Intent intent = new Intent(LoginMhs.this, MainActivityMhs.class);
                     startActivity(intent);
                     finish();

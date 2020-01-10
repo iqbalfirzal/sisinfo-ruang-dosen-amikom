@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +18,21 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,16 +51,26 @@ public class Chat extends AppCompatActivity {
     private DateFormat df = new SimpleDateFormat("d/M/yyyy, HH:mm");
     private final String waktu = df.format(Calendar.getInstance().getTime());
 
+    private RequestQueue mRequestQue;
+    private String SENDNOTIFURL = "https://fcm.googleapis.com/fcm/send";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
+        if (getIntent().hasExtra("notifSenderId")){
+            String notifSenderId = getIntent().getStringExtra("notifSenderId");
+            String notifSenderName = getIntent().getStringExtra("notifSenderName");
+            globalVariable.setChatWith(notifSenderId);
+            globalVariable.setChatWithName(notifSenderName);
+        }
 
         Firebase.setAndroidContext(this);
-        String getMyId = globalVariable.getId();
-        String getChatWithId = globalVariable.getChatWith();
+        final String getMyId = globalVariable.getId();
+        final String getChatWithId = globalVariable.getChatWith();
         final String getMyUsername = new LoginPrefManager(this).getChatUserName();
         final String getChatWithName = globalVariable.getChatWithName();
         getSupportActionBar().setTitle(getChatWithName);
@@ -65,6 +87,9 @@ public class Chat extends AppCompatActivity {
         reference1 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getMyId + "/" + getChatWithId);
         reference2 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getChatWithId + "/" + getMyId);
 
+        mRequestQue = Volley.newRequestQueue(this);
+        FirebaseMessaging.getInstance().subscribeToTopic(getMyId);
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,11 +100,10 @@ public class Chat extends AppCompatActivity {
                     map.put("message", messageText);
                     map.put("sender", getMyUsername);
                     map.put("time", waktu);
+                    sendNotification(getMyUsername, messageText, getMyId, getChatWithId);
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
-                    messageArea.getText().clear();
-                    messageArea.findFocus();
-                    messageArea.requestFocus();
+                    messageArea.setText("");
                     scrollView.fullScroll(View.SCROLL_INDICATOR_END);
                 }
             }
@@ -164,6 +188,58 @@ public class Chat extends AppCompatActivity {
         messageText.setLayoutParams(lpm);
         timeText.setLayoutParams(lpt);
         scrollView.fullScroll(View.FOCUS_DOWN);
+    }
+
+    private void sendNotification(String sendername, String message, String senderId, String chatWithId) {
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("to","/topics/"+chatWithId);
+            JSONObject notificationObj = new JSONObject();
+            notificationObj.put("title",sendername);
+            notificationObj.put("body",message);
+
+            JSONObject extraData = new JSONObject();
+            extraData.put("senderid",senderId);
+            extraData.put("sendername",sendername);
+            extraData.put("message",message);
+
+
+
+            json.put("notification",notificationObj);
+            json.put("data",extraData);
+
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, SENDNOTIFURL,
+                    json,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                            Log.d("MUR", "onResponse: ");
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("MUR", "onError: "+error.networkResponse);
+                }
+            }
+            ){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String,String> header = new HashMap<>();
+                    header.put("content-type","application/json");
+                    header.put("authorization","key=AIzaSyDTO-mUjWBPLezxMFa8Tg7AhAq8_EzVfNA");
+                    return header;
+                }
+            };
+            mRequestQue.add(request);
+        }
+        catch (JSONException e)
+
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
