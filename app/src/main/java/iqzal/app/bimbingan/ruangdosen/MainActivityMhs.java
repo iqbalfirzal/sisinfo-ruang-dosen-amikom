@@ -27,8 +27,6 @@ public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         globalVariable.setChatWithName("");
-        final String getMyId = globalVariable.getId();
-        FirebaseMessaging.getInstance().subscribeToTopic(getMyId);
         auth = FirebaseAuth.getInstance();
 
         if (savedInstanceState == null) {
@@ -63,8 +61,11 @@ public class MainActivityMhs extends AppCompatActivity implements DialogAboutMhs
 
     @Override
     public void onItemClick() {
+        final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
+        globalVariable.setId("");
         new LoginPrefManager(this).clearData();
         auth.signOut();
+        FirebaseMessaging.getInstance().subscribeToTopic("null");
         Intent myIntent = new Intent(MainActivityMhs.this,
                 Choose.class);
         startActivity(myIntent);

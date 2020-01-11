@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginDosen extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -56,6 +57,7 @@ public class LoginDosen extends AppCompatActivity {
                             if(userEmail != null){
                                 saveLoginDetails(username, "dosen", userFullName);
                                 globalVariable.setId(username);
+                                FirebaseMessaging.getInstance().subscribeToTopic(username);
                                 performLogin(userEmail, password);
                             }else{
                                 progressBar.setVisibility(View.GONE);

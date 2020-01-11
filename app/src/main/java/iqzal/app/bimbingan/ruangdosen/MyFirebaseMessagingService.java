@@ -36,6 +36,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         String senderid = extraData.get("senderid");
         String sendername = extraData.get("sendername");
+        String iduser = new LoginPrefManager(this).getIdLoggedIn();
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, "RuDoApp")
@@ -43,23 +44,22 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setContentText(body)
                         .setSmallIcon(R.drawable.ic_chat_list);
         Intent intent;
-        if (!senderid.isEmpty()) {
-            intent = new Intent(this, Chat.class);
+        if (senderid.isEmpty()||senderid.equals(iduser)) {
+            //nothingtodo
         } else {
             intent = new Intent(this, Chat.class);
-        }
-        intent.putExtra("notifSenderId", senderid);
-        intent.putExtra("notifSenderName", sendername);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 10, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        notificationBuilder.setContentIntent(pendingIntent);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        int id =  (int) System.currentTimeMillis();
+            intent.putExtra("notifSenderId", senderid);
+            intent.putExtra("notifSenderName", sendername);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 10, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            notificationBuilder.setContentIntent(pendingIntent);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            int id =  (int) System.currentTimeMillis();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("RuDoApp","chatnotif",NotificationManager.IMPORTANCE_HIGH);
-            notificationManager.createNotificationChannel(channel);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                NotificationChannel channel = new NotificationChannel("RuDoApp","chatnotif",NotificationManager.IMPORTANCE_HIGH);
+                notificationManager.createNotificationChannel(channel);
+            }
+            notificationManager.notify(id,notificationBuilder.build());
         }
-        notificationManager.notify(id,notificationBuilder.build());
-
     }
 }

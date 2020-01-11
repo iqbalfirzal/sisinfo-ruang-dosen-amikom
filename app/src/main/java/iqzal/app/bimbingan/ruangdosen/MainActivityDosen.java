@@ -23,8 +23,7 @@ public class MainActivityDosen extends AppCompatActivity {
 
         final SavedIdClass globalVariable = (SavedIdClass) getApplicationContext();
         globalVariable.setChatWithName("");
-        final String getMyId = globalVariable.getId();
-        FirebaseMessaging.getInstance().subscribeToTopic(getMyId);
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_dosen,

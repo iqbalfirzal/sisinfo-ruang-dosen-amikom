@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -206,6 +207,7 @@ public class DashDosenFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 clearPrefData();
                 auth.signOut();
+                FirebaseMessaging.getInstance().subscribeToTopic("null");
                 Intent myIntent = new Intent(getActivity(), Choose.class);
                 startActivity(myIntent);
                 getActivity().finish();
@@ -222,6 +224,8 @@ public class DashDosenFragment extends Fragment {
 
     private void clearPrefData(){
         new LoginPrefManager(this.getActivity().getApplicationContext()).clearData();
+        final SavedIdClass globalVariable = (SavedIdClass) getActivity().getApplicationContext();
+        globalVariable.setId("");
     }
 
 }

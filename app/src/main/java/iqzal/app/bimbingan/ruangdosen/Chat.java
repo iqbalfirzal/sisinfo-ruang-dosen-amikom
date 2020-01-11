@@ -88,7 +88,6 @@ public class Chat extends AppCompatActivity {
         reference2 = new Firebase("https://iqzal-app-bimbngan-ruang-dosen.firebaseio.com/chats/" + getChatWithId + "/" + getMyId);
 
         mRequestQue = Volley.newRequestQueue(this);
-        FirebaseMessaging.getInstance().subscribeToTopic(getMyId);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

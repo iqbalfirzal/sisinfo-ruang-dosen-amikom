@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginMhs extends AppCompatActivity {
     ProgressBar progressBar;
@@ -60,6 +61,7 @@ public class LoginMhs extends AppCompatActivity {
                             if(userEmail != null){
                                 saveLoginDetails(username, "mhs", userFullName);
                                 globalVariable.setId(username);
+                                FirebaseMessaging.getInstance().subscribeToTopic(username);
                                 performLogin(userEmail, username, password);
                             }else{
                                 progressBar.setVisibility(View.GONE);
